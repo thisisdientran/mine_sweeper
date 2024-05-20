@@ -9,7 +9,13 @@ if(MSVC)
     add_link_options(/W4)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
     # message("compiler: MSVC")
-else()
+    # set(SFML_INCLUDE_DIR "./SFML-2.5.1/include")
+    # set(SFML_LIBRARY_DIR "./SFML-2.5.1/build/lib")
+    # link_directories(SFML_LIBRARY_DIR)
+    # include_directories(SFML_INCLUDE_DIR)
+    # find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
+
+    else()
     # message("compiler: NOT MSVC")
     # add_compile_options(-Wall -Wextra -pedantic -Werror -Wl,--fatal-warnings)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -19,6 +25,12 @@ endif()
 # place binaries and libraries according to GNU standards
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+
+set(SFML_INCLUDE_DIR "./SFML-2.5.1/include")
+set(SFML_LIBRARY_DIR "./SFML-2.5.1/build/lib")
+link_directories(SFML_LIBRARY_DIR)
+include_directories(SFML_INCLUDE_DIR)
+find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 
 
 
@@ -76,8 +88,7 @@ ADD_EXECUTABLE(testB
     #- - - - - - - - - - - - - - - - 
 )
 
-TARGET_LINK_LIBRARIES(basic_test gtest)
-TARGET_LINK_LIBRARIES(testB gtest)
-
- 
+TARGET_LINK_LIBRARIES(basic_test gtest sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(testB gtest sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(main gtest sfml-graphics sfml-window sfml-system) 
 
